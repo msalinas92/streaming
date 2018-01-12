@@ -8,8 +8,8 @@ compression = require('compression');
 console.log('Servidor iniciado');
 cluster((worker) => {
     app.use(compression());
-    app.get('/video', (req, res) => {
-        const path = 'videos/video.mp4';
+    app.get('/:name', (req, res) => {
+        const path = 'videos/'+req.params.name+'.mp4';
         const stat = fs.statSync(path);
         const fileSize = stat.size;
         const range = req.headers.range;
